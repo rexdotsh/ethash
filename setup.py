@@ -28,9 +28,13 @@ depends = [
     'src/libethash/sha3.h',
     'src/libethash/util.h',
 ]
+libraries = []
+if os.name == 'nt':
+    libraries = ["Shell32"]
 pyethash = Extension('pyethash',
                      sources=sources,
                      depends=depends,
+                     libraries=libraries,
                      extra_compile_args=["-Isrc/", "-std=gnu99", "-Wall"])
 
 setup(
@@ -38,7 +42,7 @@ setup(
     author="Matthew Wampler-Doty",
     author_email="matthew.wampler.doty@gmail.com",
     license='GPL',
-    version='0.1.23',
+    version='0.1.27',
     url='https://github.com/ethereum/ethash',
     download_url='https://github.com/ethereum/ethash/tarball/v23',
     description=('Python wrappers for ethash, the ethereum proof of work'
